@@ -1,4 +1,4 @@
-Frontend Switcher
+# Frontend Switcher
 
 This Script will allow you to easily switch between the EmulationStation and Pegasus frontends on your RetroFlag Gpi Case.
 
