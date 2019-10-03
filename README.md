@@ -3,6 +3,7 @@
 This Script will allow you to easily switch between the EmulationStation and Pegasus frontends on your RetroFlag Gpi Case.
 
 <b>So what does it do?</b>
+
 The script will handle the switching of settings in the autostart.sh and multiswitch.sh files as well as the installation of Pegasus and the GPiOs theme created by SinisterSpatula which is designed for the GPi Case screen resolution.
 
 <b>Hold your horses, I want to go back !</b>
