@@ -107,13 +107,15 @@ function Pegasus() {
 			cd ~/.config/pegasus-frontend/themes/pegasus-theme-gpiOS
 		if ! git diff --quiet remotes/origin/HEAD; then
 		echo "CHANGES DETECTED !"
-				dialog --begin 2 1 --no-shadow --title "Update available" --hline "$HLINETEXT" --backtitle "Update available" --yes-label "Now" --no-label "Later" --yesno "\nAn update is available for GPiOS.\n\nDo you want to install this now?" 26 38
+		YesNoPrompt "Update available" "$HLINETEXT" "Update available" "Now"  "Later" "\nAn update is available for GPiOS.\n\nDo you want to install this now?" "git pull" ":"
 		
-			response=$?
-			case $response in
-			0) git pull;;
-			1) :;;
-			esac
+			#	dialog --begin 2 1 --no-shadow --title  --hline  --backtitle  --yes-label  --no-label--yesno  26 38
+		
+			#response=$?
+			#case $response in
+			#0) ;;
+			#1) :;;
+			#esac
 		else
 		echo "NO CHANGES DETECTED !" 
 		fi
@@ -145,7 +147,7 @@ function Pegasus() {
 		#sleep 5s
 		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nDone !" 26 38 20
 		#sleep 5s
-		RebootPrompt "Reboot required" "  GPi Case Users  " "Reboot required" "Now" "Later" "\nA reboot is required for the changes to take effect.\n\nDo you want to do this now?" $(exit) $(sudo reboot)
+		YesNoPrompt "Reboot required" "  GPi Case Users  " "Reboot required" "Now" "Later" "\nA reboot is required for the changes to take effect.\n\nDo you want to do this now?" "exit" "sudo reboot"
 	sleep 30s
 	#fi
 }
@@ -156,10 +158,15 @@ function MessageBox {
 		exit 1
 }
 
-function RebootPrompt {
-		dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --yes-label $4 --no-label $5 --yesno "$6" 26 38 20>&1 > /dev/tty \
-		"|| $7"
-		"$8"	
+function YesNoPrompt {
+    if ! dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" \
+        --backtitle "$3" --yes-label "$4" --no-label "$5" \
+        --yesno "$6" 26 38 20>&1 > /dev/tty
+    then
+      eval "$7"
+    else
+      eval "$8" > /dev/null 2>&1
+    fi
 }
 
 # Main
