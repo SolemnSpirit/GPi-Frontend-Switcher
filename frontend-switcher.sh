@@ -9,8 +9,7 @@
 #usage:         ./Frontend-Switcher.sh
 #======================================================================================
 
-PROGRESSNUMBER=0
-
+#PROGRESSNUMBER=0
 #screen_color = (CYAN,BLACK,ON)
 
 function main_menu() {
