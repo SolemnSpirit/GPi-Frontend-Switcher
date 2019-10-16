@@ -3,7 +3,7 @@
 This Script will allow you to easily switch between the EmulationStation and Pegasus frontends on your RetroFlag Gpi Case.
   
   
-## So what does it do?
+## So what does it do?  
   
 The script will handle:
 - The installation of the Pegasus frontend
