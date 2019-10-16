@@ -8,13 +8,7 @@
 #usage:         ./Frontend-Switcher.sh
 #==============================================================================
 
-BACKTITLETEXT="Brought to you by GPi Case Users Group"
-HLINETEXT="  GPi Case Users  "
-FRONTENDNAME=""
-TITLETEXT=""
-MSGBODY=""
 PROGRESSNUMBER=0
-PROGRESSMSG=""
 
 #screen_color = (CYAN,BLACK,ON)
 
@@ -44,9 +38,7 @@ function main_menu() {
 function EmulationStation() {
 	FRONTENDNAME="EmulationStation"
 	#if grep -q emulationstation /opt/retropie/configs/all/autostart.sh; then
-		#TITLETEXT="\Z1\ZbFRONTEND ALREADY SET\Zn"
-		#MSGBODY="\n\n$FRONTENDNAME is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
-		#MessageBox
+		#MessageBox "\Z1\ZbFRONTEND ALREADY SET\Zn" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\n$FRONTENDNAME is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
 	#else
 		STEPS=4
 		STEPSCOMPLETE=0
@@ -81,9 +73,7 @@ function EmulationStation() {
 function Pegasus() {
 	FRONTENDNAME="Pegasus"
 	#if grep -q pegasus-fe /opt/retropie/configs/all/autostart.sh; then
-		#TITLETEXT="\Z1\ZbFRONTEND ALREADY SET\Zn"
-		#MSGBODY="\n\n$FRONTENDNAME is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
-		#MessageBox
+		#MessageBox "\Z1\ZbFRONTEND ALREADY SET\Zn" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\n$FRONTENDNAME is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
 	#else
 
 		STEPS=6
@@ -145,7 +135,7 @@ function Pegasus() {
 		sudo sed -i '158 a sudo shutdown -h now' /opt/RetroFlag/multi_switch.sh
 		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nDone !" 26 38 20
+		echo $((STEPSCOMPLETE * 100 / STEPS)) | ProgressBar "Setting $FRONTENDNAME as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nDone !"
 		#sleep 5s
 		YesNoPrompt "Reboot required" "  GPi Case Users  " "Reboot required" "Now" "Later" "\nA reboot is required for the changes to take effect.\n\nDo you want to do this now?" "exit" "sudo reboot"
 	sleep 30s
@@ -153,7 +143,7 @@ function Pegasus() {
 }
 
 function MessageBox {
-	dialog --begin 2 1 --no-shadow --title "$TITLETEXT" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --colors --msgbox "$MSGBODY" 27 38
+	dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --colors --msgbox "$4" 27 38
 		sleep 1s
 		exit 1
 }
@@ -167,6 +157,10 @@ function YesNoPrompt {
     else
       eval "$8" > /dev/null 2>&1
     fi
+}
+
+function ProgressBar {
+dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --gauge "$4" 26 38 20
 }
 
 # Main
