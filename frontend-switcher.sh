@@ -12,6 +12,9 @@
 #PROGRESSNUMBER=0
 #screen_color = (CYAN,BLACK,ON)
 
+#should hide cursor (but probably won't) - tput norm to make visible
+tput civis 
+
 function main_menu() {
     local choice
 
