@@ -79,13 +79,13 @@ function Pegasus() {
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nPlease wait..."
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking for existing $FRONTENDNAME install..."
 		if [ -d "/opt/retropie/configs/all/pegasus-fe" ]; then
-		StepsComplete=$((StepsComplete + 1))
+		((++StepsComplete))
 		else
-		StepsComplete=$((StepsComplete + 1))
+		((++StepsComplete))
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nInstalling $FRONTENDNAME..."
 		cd ~/RetroPie-Setup > /dev/null 2>&1
 		sudo ./retropie_packages.sh pegasus-fe > /dev/null 2>&1
-		StepsComplete=$((StepsComplete + 1))
+		((++StepsComplete))
 		fi
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking Pegasus theme directory..."
 		#sleep 6s
@@ -112,18 +112,18 @@ function Pegasus() {
 			echo "Installing default theme (gpiOS)..."
 			cd ~/.config/pegasus-frontend/themes/ && git clone https://github.com/SinisterSpatula/pegasus-theme-gpiOS.git --branch master --depth 1
 		fi  
-		StepsComplete=$((StepsComplete + 1))      
+		((++StepsComplete))     
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking autostart..."
 		grep -q emulationstation /opt/retropie/configs/all/autostart.sh;
-		StepsComplete=$((StepsComplete + 1))
+		((++StepsComplete))
 		#sleep 5s
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring autostart..."
 		sudo sed -i 's/emulationstation/pegasus-fe/g' /opt/retropie/configs/all/autostart.sh
-		StepsComplete=$((StepsComplete + 1))
+		((++StepsComplete))
 		#sleep 5s
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking safe shutdown..."
 		grep -q 'emulationstation(' /opt/RetroFlag/multi_switch.sh;
-		StepsComplete=$((StepsComplete + 1))
+		((++StepsComplete))
 		#sleep 5s
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring safe shutdown..."
 		sudo sed -i 's/emulationstation/pegasus-fe/g' /opt/RetroFlag/multi_switch.sh
@@ -150,14 +150,14 @@ function YesNoPrompt {
         --backtitle "$3" --yes-label "$4" --no-label "$5" \
         --yesno "$6" 26 38 20>&1 > /dev/tty
     then
-    	eval "$7"
+    	eval "$7" > /dev/null 2>&1
     else
     	eval "$8" > /dev/null 2>&1
     fi
 }
 
 function ProgressBar {
-echo $((StepsComplete * 100 / Steps)) | dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --gauge "$4" 26 38 20
+	echo $((StepsComplete * 100 / Steps)) | dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --gauge "$4" 26 38 20
 }
 
 # Main
