@@ -3,7 +3,7 @@
 #title:         Frontend-Switcher.sh
 #description:   Lets you switch between Emulationstation and Pegasus frontends easily
 #author:        SolemnSpirit
-#originally created:       September 19 2019
+#created:       September 19 2019
 #version:       0.8
 #last updated: October 10 2019
 #usage:         ./Frontend-Switcher.sh
