@@ -1,27 +1,25 @@
 #!/bin/bash
-#=============================================================================
+#======================================================================================
 #title:         Frontend-Switcher.sh
 #description:   Lets you switch between Emulationstation and Pegasus frontends easily
 #author:        SolemnSpirit
-#created:       September 19 2019
-#version:       0.5
+#originally created:       September 19 2019
+#version:       0.8
+#last updated: October 10 2019
 #usage:         ./Frontend-Switcher.sh
-#==============================================================================
+#======================================================================================
 
 PROGRESSNUMBER=0
 
 #screen_color = (CYAN,BLACK,ON)
-
 
 function main_menu() {
     local choice
 
     while true; do
         choice=$(dialog --begin 2 1 --no-shadow \
-		--hline "$HLINETEXT" \
-		--backtitle "$BACKTITLETEXT" \
-		--title " GPi FRONTEND SWITCHER " \
-        --ok-label Select --cancel-label Cancel \
+	    --hline "  GPi Case Users  " --backtitle "Brought to you by GPi Case Users Group" --title " GPi FRONTEND SWITCHER " \
+            --ok-label Select --cancel-label Cancel \
             --menu "\nSelect a frontend:" 26 38 20\
             1 "EmulationStation" \
             2 "Pegasus" \
@@ -36,61 +34,61 @@ function main_menu() {
 }
 
 function EmulationStation() {
-	FRONTENDNAME="EmulationStation"
+	FrontendName="EmulationStation"
 	#if grep -q emulationstation /opt/retropie/configs/all/autostart.sh; then
-		#MessageBox "\Z1\ZbFRONTEND ALREADY SET\Zn" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\n$FRONTENDNAME is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
+		#MessageBox "\Z1\ZbFRONTEND ALREADY SET\Zn" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\n$FrontendName is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
 	#else
-		STEPS=4
-		STEPSCOMPLETE=0
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nPlease wait..." 26 38 20
+		Steps=4
+		StepsComplete=0
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nPlease wait..."
 		#sleep 20s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nChecking autostart..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking autostart..."
 		grep -q pegasus-fe /opt/retropie/configs/all/autostart.sh > /dev/null 2>&1
 		#sleep 20s
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nConfiguring autostart..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring autostart..."
 		sudo sed -i 's/pegasus-fe/emulationstation/g' /opt/retropie/configs/all/autostart.sh > /dev/null 2>&1
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nChecking safe shutdown..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking safe shutdown..."
 		grep -q 'pegasus-fe(' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nConfiguring safe shutdown..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring safe shutdown..."
 		sudo sed -i 's/pegasus-fe/emulationstation/g' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
 		sudo sed -i '155 s/^..//' /opt/RetroFlag/multi_switch.sh
 		sudo sed -i '156 s/^..//' /opt/RetroFlag/multi_switch.sh
 		sudo sed -i -e '159d' /opt/RetroFlag/multi_switch.sh
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nDone !" 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nDone !"
 		#sleep 5s
 		RebootPrompt
 	#fi
 }
 
 function Pegasus() {
-	FRONTENDNAME="Pegasus"
+	FrontendName="Pegasus"
 	#if grep -q pegasus-fe /opt/retropie/configs/all/autostart.sh; then
-		#MessageBox "\Z1\ZbFRONTEND ALREADY SET\Zn" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\n$FRONTENDNAME is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
+		#MessageBox "\Z1\ZbFRONTEND ALREADY SET\Zn" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\n$FrontendName is already set as your frontend.\n\nPress OK to go back to the Retropie menu."
 	#else
 
-		STEPS=6
-		STEPSCOMPLETE=0
+		Steps=6
+		StepsComplete=0
 
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nPlease wait..." 26 38 20
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nChecking for existing $FRONTENDNAME install..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nPlease wait..."
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking for existing $FRONTENDNAME install..."
 		if [ -d "/opt/retropie/configs/all/pegasus-fe" ]; then
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		else
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nInstalling $FRONTENDNAME..." 26 38 20
+		StepsComplete=$((StepsComplete + 1))
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nInstalling $FRONTENDNAME..."
 		cd ~/RetroPie-Setup > /dev/null 2>&1
 		sudo ./retropie_packages.sh pegasus-fe > /dev/null 2>&1
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		fi
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nChecking Pegasus theme directory..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking Pegasus theme directory..."
 		#sleep 6s
 		if [ -d "/opt/retropie/configs/all/pegasus-fe/themes/pegasus-theme-gpiOS" ]; then
 			echo "I found theme-gpiOS  !"
@@ -115,27 +113,27 @@ function Pegasus() {
 			echo "Installing default theme (gpiOS)..."
 			cd ~/.config/pegasus-frontend/themes/ && git clone https://github.com/SinisterSpatula/pegasus-theme-gpiOS.git --branch master --depth 1
 		fi  
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))      
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nChecking autostart..." 26 38 20
+		StepsComplete=$((StepsComplete + 1))      
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking autostart..."
 		grep -q emulationstation /opt/retropie/configs/all/autostart.sh;
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nConfiguring autostart..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring autostart..."
 		sudo sed -i 's/emulationstation/pegasus-fe/g' /opt/retropie/configs/all/autostart.sh
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nChecking safe shutdown..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking safe shutdown..."
 		grep -q 'emulationstation(' /opt/RetroFlag/multi_switch.sh;
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | dialog --begin 2 1 --no-shadow --title "Setting $FRONTENDNAME as frontend" --hline "$HLINETEXT" --backtitle "$BACKTITLETEXT" --gauge "\n\nConfiguring safe shutdown..." 26 38 20
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring safe shutdown..."
 		sudo sed -i 's/emulationstation/pegasus-fe/g' /opt/RetroFlag/multi_switch.sh
 		sudo sed -i '155 s/^/#/' /opt/RetroFlag/multi_switch.sh
 		sudo sed -i '156 s/^/#/' /opt/RetroFlag/multi_switch.sh
 		sudo sed -i '158 a sudo shutdown -h now' /opt/RetroFlag/multi_switch.sh
-		STEPSCOMPLETE=$((STEPSCOMPLETE + 1))
+		((++StepsComplete))
 		#sleep 5s
-		echo $((STEPSCOMPLETE * 100 / STEPS)) | ProgressBar "Setting $FRONTENDNAME as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nDone !"
+		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nDone !"
 		#sleep 5s
 		YesNoPrompt "Reboot required" "  GPi Case Users  " "Reboot required" "Now" "Later" "\nA reboot is required for the changes to take effect.\n\nDo you want to do this now?" "exit" "sudo reboot"
 	sleep 30s
@@ -160,7 +158,7 @@ function YesNoPrompt {
 }
 
 function ProgressBar {
-dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --gauge "$4" 26 38 20
+echo $((StepsComplete * 100 / Steps)) | dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --gauge "$4" 26 38 20
 }
 
 # Main
