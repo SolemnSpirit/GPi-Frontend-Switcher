@@ -56,9 +56,9 @@ function EmulationStation() {
 		#sleep 5s
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring safe shutdown..."
 		sudo sed -i 's/pegasus-fe/emulationstation/g' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
-		sudo sed -i '155 s/^..//' /opt/RetroFlag/multi_switch.sh
-		sudo sed -i '156 s/^..//' /opt/RetroFlag/multi_switch.sh
-		sudo sed -i -e '159d' /opt/RetroFlag/multi_switch.sh
+		sudo sed -i '155 s/^..//' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
+		sudo sed -i '156 s/^..//' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
+		sudo sed -i -e '159d' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
 		StepsComplete=$((StepsComplete + 1))
 		#sleep 5s
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nDone !"
@@ -90,10 +90,10 @@ function Pegasus() {
 		ProgressBar "Setting $FrontendName as frontend" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking Pegasus theme directory..."
 		#sleep 6s
 		if [ -d "/opt/retropie/configs/all/pegasus-fe/themes/pegasus-theme-gpiOS" ]; then
-			echo "I found theme-gpiOS  !"
+			echo "I found theme-gpiOS ! :-D"
 			cd ~/.config/pegasus-frontend/themes/pegasus-theme-gpiOS
 		if ! git diff --quiet remotes/origin/HEAD; then
-		echo "CHANGES DETECTED !"
+		echo "CHANGES DETECTED ! :-O"
 		YesNoPrompt "Update available" "$HLINETEXT" "Update available" "Now"  "Later" "\nAn update is available for GPiOS.\n\nDo you want to install this now?" "git pull" ":"
 		
 			#	dialog --begin 2 1 --no-shadow --title  --hline  --backtitle  --yes-label  --no-label--yesno  26 38
@@ -104,7 +104,7 @@ function Pegasus() {
 			#1) :;;
 			#esac
 		else
-		echo "NO CHANGES DETECTED !" 
+		echo "NO CHANGES DETECTED ! :-|"
 		fi
 			
 		#	sleep 30s
@@ -141,8 +141,8 @@ function Pegasus() {
 
 function MessageBox {
 	dialog --begin 2 1 --no-shadow --title "$1" --hline "$2" --backtitle "$3" --colors --msgbox "$4" 27 38
-		sleep 1s
-		exit 1
+	sleep 1s
+	exit 1
 }
 
 function YesNoPrompt {
@@ -150,9 +150,9 @@ function YesNoPrompt {
         --backtitle "$3" --yes-label "$4" --no-label "$5" \
         --yesno "$6" 26 38 20>&1 > /dev/tty
     then
-      eval "$7"
+    	eval "$7"
     else
-      eval "$8" > /dev/null 2>&1
+    	eval "$8" > /dev/null 2>&1
     fi
 }
 
