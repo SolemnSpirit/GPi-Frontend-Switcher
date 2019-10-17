@@ -17,8 +17,8 @@
 #tput civis 
 if [ ! -f /home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc ]
 then
-:
-#dialog --create-rc "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc"
+
+dialog --create-rc /home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc
 fi
 export DIALOGRC=/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc
 
