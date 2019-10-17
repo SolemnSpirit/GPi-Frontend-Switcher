@@ -13,15 +13,14 @@
 #
 
 #should hide cursor (but probably won't) - tput norm to make visible
-export TERM=linux
-tput civis 
-if [ ! -f /home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc ]
+#export TERM=linux
+#tput civis 
+if [ ! -f /home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/dialogrc ]
 then
 :
-#dialog --create-rc "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc"
+#dialog --create-rc "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/dialogrc"
 fi
-export DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc"
-
+export DIALOGRC=/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/dialogrc
 
 function main_menu() {
     local choice
