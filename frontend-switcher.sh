@@ -27,11 +27,11 @@ function main_menu() {
 
     while true; do
         choice=$(dialog --begin 2 1 --no-shadow \
-	    --hline "  GPi Case Users  " --backtitle "Brought to you by GPi Case Users Group" --title " GPi FRONTEND SWITCHER " \
+	    --hline "  HLINE  " --backtitle "Backtitle" --title " TITLE " \
             --ok-label Select --cancel-label Cancel \
-            --menu "\nSelect a frontend:" 26 38 20\
-            1 "EmulationStation" \
-            2 "Pegasus" \
+            --menu "\nSelect an option:" 26 38 20\
+            1 "Option 1" \
+            2 "Option 2" \
             2>&1 > /dev/tty)
 
         case "$choice" in
