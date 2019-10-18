@@ -11,7 +11,7 @@
 
 #should hide cursor (but probably won't) - tput norm to make visible
 
-if [ ! -f "/home/oi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.conf" ]
+if [ ! -f "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.conf" ]
 then
 
 dialog --create-rc "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.conf"
