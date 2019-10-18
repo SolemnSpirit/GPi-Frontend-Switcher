@@ -18,14 +18,12 @@ dialog --create-rc "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switche
 fi
 
 # General Declarations
-
-
-#tput civis 
-
 export DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dialogrc"
 
-setterm -cursor off
-tput civis
+export tput civis 
+
+#setterm -cursor off
+#tput civis
 function main_menu() {
 DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dialogrc"
 	
@@ -34,7 +32,7 @@ DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dia
 
     while true; do
         choice=$(dialog --begin 2 1 --no-shadow \
-	    --title " TITLE " --hline "  GPi Case Users  " --backtitle "Brought to you by GPi Case Users Group"  \
+	    --title " GPi FRONTEND SWITCHER " --hline "  GPi Case Users  " --backtitle "Brought to you by GPi Case Users Group"  \
             --ok-label Select --cancel-label Cancel \
             --menu "\nSelect an option:" 26 38 20\
             1 "EmulationStation" \
