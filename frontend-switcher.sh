@@ -11,14 +11,14 @@
 
 #should hide cursor (but probably won't) - tput norm to make visible
 
-if [ ! -f ./GPFS.conf ]
+if [ ! -f GPFS.conf ]
 then
 
-dialog --create-rc "./GPFS.conf"
+dialog --create-rc "GPFS.conf"
 fi
 
 # General Declarations
-DIALOGRC="./GPFS.conf"
+DIALOGRC="GPFS.conf"
 
 #tput civis 
 
