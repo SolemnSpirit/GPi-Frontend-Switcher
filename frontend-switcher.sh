@@ -9,17 +9,21 @@
 #usage:         ./Frontend-Switcher.sh
 #======================================================================================
 
-#PROGRESSNUMBER=0
-#
-
 #should hide cursor (but probably won't) - tput norm to make visible
 
-#tput civis 
-if [ ! -f /home/pi/test.dialogrc ]
+if [ ! -f /home/pi/GPFS ]
 then
 
-dialog --create-rc "/home/pi/test.dialogrc"
+dialog --create-rc "/home/pi/GPFS"
 fi
+
+# General Declarations
+DIALOGRC="/home/pi/GPFS"
+
+#tput civis 
+
+
+
 setterm -cursor off
 tput civis
 function main_menu() {
@@ -52,7 +56,7 @@ function EmulationStation() {
 	#else
 		Steps=4
 		StepsComplete=0
-		DIALOGRC="/home/pi/test.dialogrc" ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nPlease wait..."
+		 ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nPlease wait..."
 		sleep 10s
 		ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking autostart..."
 		grep -q pegasus-fe /opt/retropie/configs/all/autostart.sh > /dev/null 2>&1
