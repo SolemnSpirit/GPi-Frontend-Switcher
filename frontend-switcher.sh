@@ -22,7 +22,7 @@ fi
 
 #tput civis 
 
-
+export DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dialogrc"
 
 setterm -cursor off
 tput civis
