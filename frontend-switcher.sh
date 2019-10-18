@@ -34,11 +34,11 @@ DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dia
 
     while true; do
         choice=$(dialog --begin 2 1 --no-shadow \
-	    --hline "  HLINE  " --backtitle "Backtitle" --title " TITLE " \
+	    --title " TITLE " --hline "  GPi Case Users  " --backtitle "Brought to you by GPi Case Users Group"  \
             --ok-label Select --cancel-label Cancel \
             --menu "\nSelect an option:" 26 38 20\
-            1 "Option 1" \
-            2 "Option 2" \
+            1 "EmulationStation" \
+            2 "Pegasus" \
             2>&1 > /dev/tty)
 
         case "$choice" in
