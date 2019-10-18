@@ -13,17 +13,20 @@
 #
 
 #should hide cursor (but probably won't) - tput norm to make visible
-#export TERM=linux
+
 #tput civis 
-if [ ! -f /home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc ]
+if [ ! -f /home/pi/test.dialogrc ]
 then
 
-dialog --create-rc "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc"
+dialog --create-rc "/home/pi/test.dialogrc"
 fi
-export DIALOGRC=/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/test.dialogrc
-
+setterm -cursor off
+tput civis
 function main_menu() {
-    local choice
+
+	sleep 20s
+	
+	local choice
 
     while true; do
         choice=$(dialog --begin 2 1 --no-shadow \
@@ -49,30 +52,30 @@ function EmulationStation() {
 	#else
 		Steps=4
 		StepsComplete=0
-		ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nPlease wait..."
+		DIALOGRC="/home/pi/test.dialogrc" ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nPlease wait..."
 		sleep 10s
 		ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking autostart..."
 		grep -q pegasus-fe /opt/retropie/configs/all/autostart.sh > /dev/null 2>&1
-		sleep 10s
+		#sleep 10s
 		((++StepsComplete))
-		sleep 10s
+		#sleep 10s
 		ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring autostart..."
 		sudo sed -i 's/pegasus-fe/emulationstation/g' /opt/retropie/configs/all/autostart.sh > /dev/null 2>&1
 		((++StepsComplete))
-		sleep 10s
+		#sleep 10s
 		ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nChecking safe shutdown..."
 		grep -q 'pegasus-fe(' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
 		((++StepsComplete))
-		sleep 10s
+		#sleep 10s
 		ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nConfiguring safe shutdown..."
 		sudo sed -i 's/pegasus-fe/emulationstation/g' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
 		sudo sed -i '155 s/^..//' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
 		sudo sed -i '156 s/^..//' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
 		sudo sed -i -e '159d' /opt/RetroFlag/multi_switch.sh > /dev/null 2>&1
 		((++StepsComplete))
-		sleep 10s
+		#sleep 10s
 		ProgressBar "|--- $FrontendName ---|" "  GPi Case Users  " "Brought to you by GPi Case Users Group" "\n\nDone !"
-		sleep 10s
+		#sleep 10s
 		YesNoPrompt "Reboot required" "  GPi Case Users  " "Reboot required" "Now" "Later" "\nA reboot is required for the changes to take effect.\n\nDo you want to do this now?" "exit" "sudo reboot"
 	#fi
 }
