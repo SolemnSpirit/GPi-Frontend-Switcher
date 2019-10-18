@@ -18,7 +18,7 @@ dialog --create-rc "/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switche
 fi
 
 # General Declarations
-DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dialogrc"
+
 
 #tput civis 
 
@@ -27,8 +27,8 @@ DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dia
 setterm -cursor off
 tput civis
 function main_menu() {
-
-	sleep 20s
+DIALOGRC="/home/pi/RetroPie/retropiemenu/gpitools/GPi-Frontend-Switcher/GPFS.dialogrc"
+	
 	
 	local choice
 
