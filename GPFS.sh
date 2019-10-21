@@ -38,21 +38,13 @@ function main_menu() {
 
 function EmulationStation() {
     Frontend_Name="${FUNCNAME[0]}"
-    TotalSteps=0
-    Steps_Complete=0
-
-}
-
-function Pegasus() {
-    echo "${FUNCNAME[0]}"
-
 #Check autostart.sh for EmulationStation
 
 #If autostart = EmulationStation then
 #Tell user EmulationStation already set and quit
 #If not set then
 
-    ( 
+  ( 
   echo 20; echo "XXX"; echo "TEST 1"; echo "XXX" ; #Configure autostart.sh
   sleep 2 ; 
   echo 40; echo "XXX"; echo "TEST 2"; echo "XXX" ; #Configure safe shutdown (switch pegasus to emulationstation)
@@ -62,13 +54,19 @@ function Pegasus() {
   echo 80; echo "XXX"; echo "TEST 4"; echo "XXX" ; #uncomment line 156
   sleep 2 ; 
   echo 100; echo "XXX"; echo "TEST 5"; echo "XXX" ; #delete line 159
-) | dialog --gauge "Switching to "${FUNCNAME[0]}"" 6 50
-
+  ) | dialog --gauge "Switching to "${FUNCNAME[0]}"" 6 50
 
 cd ~/RetroPie-Setup
 
 sudo ./retropie_packages.sh pegasus-fe | pv -p | dialog --gauge "TESTING" 6 50 
 sleep 10s
+
+}
+
+function Pegasus() {
+    echo "${FUNCNAME[0]}"
+
+
 }
 
 function Progress_Bar() {
